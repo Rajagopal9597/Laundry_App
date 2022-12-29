@@ -15,7 +15,7 @@ const Navbar = () => {
                 <div className='list__item'>
                     Career
                 </div>
-                <div className="list__item currentpage" >
+                <div className="list__item " >
                   Sign In
                 </div>
                
