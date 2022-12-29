@@ -18,7 +18,7 @@
     text-transform: uppercase;
     opacity: 1;
   }
-  
+ 
   .user__img {
     box-shadow: 0px 3px 6px #00000029;
     opacity: 1;
@@ -30,7 +30,7 @@
   
   .Navbar {
     display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     position: absolute;
     right: 0;
     justify-content: center;
@@ -45,6 +45,10 @@
     color: #565657;
     width: 112.5px;
     /* margin: 0 ; */
+  }
+
+  .list__item:hover{
+    cursor: pointer;
   }
   
   .user__header {
