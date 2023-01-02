@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import CreateOrder from './components/CreateOrder/CreateOrder'
 import Navbar from './components/Navbar/Navbar'
 import Register from './components/Register/Register'
 import Sign_in from './components/signin/Sign_in'
@@ -10,6 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Sign_in />}/>
         <Route path="/register" element={<Register />}/>
+        <Route path="/create" element={<CreateOrder />}></Route>
       </Routes>
       
     </BrowserRouter>
