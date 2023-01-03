@@ -4,6 +4,7 @@
 
 .header {
     position: absolute;
+    left: 40px;
     top: 0;
     /* border: 1px solid; */
     width: 1405px;
