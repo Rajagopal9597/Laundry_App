@@ -16,15 +16,19 @@
     transition: 0.4s;
 }
 
-.search-container:hover .search-box{
+.search-con:hover .search-box{
     transform:translateY(4px);
     border-color: #1D377E;
 }
 
 
-.search-container:hover .search-icon{
+.search-con:hover .search-icon{
     padding: 0;
     margin: 0;
     background: url("../../images/search-blue.png") no-repeat;
     transform: translateY(-4px);
+}
+
+.search-con:hover .search-icon img{
+    visibility: hidden;
 }
