@@ -4,6 +4,7 @@ import Search from "../Search/Search";
 import Table from "../CreateTable/Table";
 import Footer2 from "../Footer2/Footer2";
 import Navbar2 from "../Navbar2/Navbar2";
+import SideNavbar from "../SideBar/SideNavbar";
 
 import "./createOrder.css"
 
@@ -16,7 +17,7 @@ export default function CreateOrder() {
                 <Navbar2/>
             </div>
             <div className="side-navbar">
-                SideNavBar Component
+                <SideNavbar/>
             </div>
             <div className="createOrder">
                 <div className='past-orders-container'>
