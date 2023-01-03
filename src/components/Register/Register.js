@@ -21,7 +21,7 @@ export default function Register(){
         e.preventDefault()
         var {name,email,phone,state,district,address,pincode,password} = user
         console.log(user)
-        axios.post("http://localhost:5000/register",{name,email,phone,state,district,address,pincode,password},{
+        axios.post("https://laundryapp-backend.onrender.com/register",{name,email,phone,state,district,address,pincode,password},{
             headers:{
                 "Content-Type":"application/json"
             }
@@ -104,10 +104,11 @@ export default function Register(){
                     </form>
                 </div>
             </div>
+            <Footer />
+            <Footer2 />
             
         </div>
-        <Footer />
-        <Footer2 />
+
         </div>
     )
 }

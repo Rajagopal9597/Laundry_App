@@ -34,7 +34,7 @@ const Sign_in = () => {
         console.log(password,data)
         if(parseInt(data)){
             phone = data
-            axios.post("http://localhost:5000/login",{phone,password},{
+            axios.post("https://laundryapp-backend.onrender.com/login",{phone,password},{
                 headers:{
                     "Content-Type":"application/json"
                 }
@@ -57,7 +57,7 @@ const Sign_in = () => {
             })
         }else{
             email = data
-            axios.post("http://localhost:5000/login",{email,password},{
+            axios.post("https://laundryapp-backend.onrender.com/login",{email,password},{
                 headers:{
                     "Content-Type":"application/json"
                 }
@@ -120,10 +120,11 @@ const Sign_in = () => {
                     </form>
                 </div>
             </div>
+            <Footer />
+            <Footer2 />
             
         </div>
-        <Footer />
-        <Footer2 />
+
     </div>
     )
 }

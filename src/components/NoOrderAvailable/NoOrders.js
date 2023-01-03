@@ -21,7 +21,6 @@ function NoOrders() {
         {console.log("no orders component rendering")}
         <p>No Orders available</p>
         <Link to="/create">
-        the create Order Page "
         <ButtonOrder bg="whitesmoke" color="#5861AE" content="Create" />
         </Link>
       </div>

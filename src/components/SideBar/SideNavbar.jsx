@@ -19,7 +19,6 @@ function SideNavbar() {
       <div className="nav-create"></div>
       </Link>
       <Link to="/create">
-      page for create order"
       <div className="nav-show"></div>
       </Link>
     </div>
