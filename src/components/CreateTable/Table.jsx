@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import CreateButton from "../Button for Create order/CreateButton";
 import "./table.css"
 
-
+import CreateOrderPageSummary from "../CreateOrderPageSummary/CreateOrderPageSummary";
+import OrderConfirmation from "../OrderConifrmation/OrderConfirmation";
 
 import shirt from "../../images/shirt.jpg"
 import washingIcon from "../../images/washing-machine.svg"
@@ -22,12 +23,40 @@ import joggers from "../../images/joggers.jpg"
 
 
 
-export default function Table() {
 
+
+export default function Table() {
+    const [isSummaryOpen, setIsSummaryOpen] = useState(false);
+    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+    const [order, setOrder] = useState({
+        status: "",
+        products: [],
+        totalPrice: 0,
+        totalQuantity: 0
+    });
 
     const [color, setcolor] = useState([false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false])
     const [disable, setDisable] = useState([false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false])
+    const status = ["Ready to Pickup", "Picked up", "In Washing", "Washed", "In Ironing", "Ironed", "in Delivery", "Delivered"]
     const washType = { "20": "washing", "15": "ironing", "10": "drywash", "25": "chemicalwash" }
+
+    const toggleSummaryPopup = () => {
+        setIsSummaryOpen(!isSummaryOpen);
+    }
+
+    const toggleConfirmationPopup = () => {
+        setIsConfirmationOpen(!isConfirmationOpen);
+    }
+
+    const [wash, setWash] = useState({
+        shirt: { washing: false, ironing: false, drywash: false, chemicalwash: false },
+        tshirt: { washing: false, ironing: false, drywash: false, chemicalwash: false },
+        trousers: { washing: false, ironing: false, drywash: false, chemicalwash: false },
+        jeans: { washing: false, ironing: false, drywash: false, chemicalwash: false },
+        boxers: { washing: false, ironing: false, drywash: false, chemicalwash: false },
+        joggers: { washing: false, ironing: false, drywash: false, chemicalwash: false },
+        others: { washing: false, ironing: false, drywash: false, chemicalwash: false }
+    })
 
     const [price, setPrice] = useState({
         shirt: 0, tshirt: 0, trousers: 0, jeans: 0, boxers: 0, joggers: 0, others: 0
@@ -43,20 +72,75 @@ export default function Table() {
         setQuantity({ ...quantity, [name]: Number(value) + 1 })
     }
 
+    const Reset = (e) => {
+        name = e.target.name
+        setQuantity({ ...quantity, [name]: 0 })
+        setPrice({ ...price, [name]: 0 })
+        setWash({ ...wash, [name]: { washing: false, ironing: false, drywashing: false, chemicalwash: false } })
+
+        const changecolor = [...color]
+        changecolor[parseInt(e.target.id)] = false
+        changecolor[parseInt(e.target.id) + 1] = false
+        changecolor[parseInt(e.target.id) + 2] = false
+        changecolor[parseInt(e.target.id) + 3] = false
+        setcolor(changecolor)
+
+        const disablebutton = [...color]
+        disablebutton[parseInt(e.target.id)] = false
+        disablebutton[parseInt(e.target.id) + 1] = false
+        disablebutton[parseInt(e.target.id) + 2] = false
+        disablebutton[parseInt(e.target.id) + 3] = false
+        setDisable(disablebutton)
+    }
+
+
     const Total = (e) => {
         name = e.target.parentElement.name
         value = e.target.parentElement.value
         prev = price[name]
         const wash_type = washType[value]
         setPrice({ ...price, [name]: Number(value) + Number(prev) })
+        const product = wash
+        product[name] = { ...product[name], [wash_type]: true }
+        setWash(product)
+
+        const id = e.target.id
+        const changecolor = [...color]
+        changecolor[parseInt(id) - 1] = !changecolor[parseInt(id) - 1]
+        setcolor(changecolor)
+
+        const disablebutton = [...disable]
+        disablebutton[parseInt(id) - 1] = !disablebutton[parseInt(id) - 1]
+        setDisable(disablebutton)
     }
 
-    const Reset = (e) =>{
-
-    }
-
-    const handleProceedClick=()=>{
-
+    const handleProceedClick = () => {
+        const random = Math.floor(Math.random() * status.length);
+        const totalPrice = price.shirt * quantity.shirt + price.tshirt * quantity.tshirt + price.trousers * quantity.trousers + price.jeans * quantity.jeans + price.boxers * quantity.boxers + price.joggers * quantity.joggers + price.others * quantity.others;
+        const totalQuantity = quantity.shirt + quantity.tshirt + quantity.trousers + quantity.jeans + quantity.boxers + quantity.joggers + quantity.others
+        const products = []
+        for (let x in quantity) {
+            let product_obj = {}
+            if (quantity[x] > 0) {
+                product_obj["productType"] = x
+                product_obj["quantity"] = quantity[x]
+                product_obj["washing"] = wash[x]["washing"]
+                product_obj["ironing"] = wash[x]["ironing"]
+                product_obj["drywash"] = wash[x]["drywash"]
+                product_obj["chemicalwash"] = wash[x]["chemicalwash"]
+                products.push(product_obj)
+            }
+            console.log(products);
+            const finalOrder = {
+                status: status[random],
+                // status:"Ready to Pickup",
+                totalPrice: totalPrice,
+                totalQuantity: totalQuantity,
+                products: products
+            }
+            setOrder(finalOrder)
+            toggleSummaryPopup()
+        }
     }
 
     return (
@@ -220,6 +304,8 @@ export default function Table() {
                     <div onClick={handleProceedClick}>
                         <CreateButton bg="#5861AE" color="white" content="Proceed"></CreateButton>
                     </div>
+                    {isSummaryOpen && <CreateOrderPageSummary order={order} handleConfirmationPopup={toggleConfirmationPopup} handleSummaryClose={toggleSummaryPopup} />}
+                    {isConfirmationOpen && <OrderConfirmation handleConfirmationPopup={toggleConfirmationPopup} />}
                 </div>
             </div>
         </div>
