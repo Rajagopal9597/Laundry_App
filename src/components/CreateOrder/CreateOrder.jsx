@@ -3,16 +3,17 @@ import React from "react";
 import Search from "../Search/Search";
 import Table from "../CreateTable/Table";
 import Footer2 from "../Footer2/Footer2";
+import Navbar2 from "../Navbar2/Navbar2";
 
 import "./createOrder.css"
-import Navbar from "../Navbar/Navbar";
+
 
 
 export default function CreateOrder() {
     return (
         <div>
             <div className="header">
-                <Navbar/>
+                <Navbar2/>
             </div>
             <div className="side-navbar">
                 SideNavBar Component
