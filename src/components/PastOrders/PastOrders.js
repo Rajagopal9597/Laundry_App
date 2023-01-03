@@ -10,7 +10,7 @@ import Navbar2 from "../Navbar2/Navbar2";
 import Footer2 from "../Footer2/Footer2";
 import SideNavbar from "../SideBar/SideNavbar";
 
-import "../../App.css";
+
 import "./pastOrder.css";
 
 function PastOrders() {
